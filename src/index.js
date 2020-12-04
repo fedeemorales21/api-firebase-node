@@ -15,5 +15,10 @@ app.use(express.json())
 // routes
 app.use('/books', booksRoutes)
 
+// handle 404
+app.use( (req, res, next) => {
+    res.json({ success: false, msg: 'ERROR 404' }).status(404)
+})
+
 // running server
 app.listen(app.get('port'), () => console.log('Server on port', app.get('port')))

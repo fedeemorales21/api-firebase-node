@@ -33,6 +33,13 @@ bookConstroller.deleteBook = ( req, res ) => {
 }
 
 
+bookConstroller.updateBook = ( req, res ) => {
+    const { name, author, isbn } = req.body
+    db.ref(`books/${req.params.id}`).set({name, author, isbn})
+    res.json({success: true, msg: 'Book Updated'})
+}
+
+
 bookConstroller.createBook = ( req, res ) => {
     const { name, author, isbn } = req.body
     if (!name || !author || !isbn) {
@@ -42,5 +49,6 @@ bookConstroller.createBook = ( req, res ) => {
     db.ref('books').push(newBook)    
     res.json({success: true, msg: 'Book Added'})
 }
+
 
 module.exports = bookConstroller
